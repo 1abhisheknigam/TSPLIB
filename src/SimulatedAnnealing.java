@@ -34,7 +34,7 @@ public class SimulatedAnnealing {
 		String output_file_trace =  workingDir + PATH_TO_RESULTS_TRACE + output_base_trace;
 		//System.out.println(output_file_trace);
 		PrintWriter output_trace = new PrintWriter(output_file_trace, "UTF-8");
-		
+		DecimalFormat twos_precision = new DecimalFormat("#0.00");
 		// Clock starts
 		double startTime = System.currentTimeMillis();
 		double endTime = 0;
@@ -95,7 +95,7 @@ public class SimulatedAnnealing {
 	        // use the next command to generate data for QRTD 
 	        //double Psolve = (currentDistance/655454-1)*100.0;
 	        // if (iterations % 10 == 0 && Psolve <= 30){
-		    output_trace.println(totalTime / 1000 + ", " + (int)currentDistance);	        	
+		    output_trace.println(twos_precision.format(totalTime / 1000) + ", " + (int)currentDistance);	        	
 	        //}
 		}
 		output_trace.close();
