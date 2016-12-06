@@ -106,7 +106,8 @@ public class RunLS1 {
             		 output_sol.println();
             	 }
             	 
-
+ 			output_sol.print(bestroute[bestroute.length-1]-1 + " " + bestroute[0]-1 + " "+ (int)distance[bestroute.length-1][0]);
+            		 output_sol.println();
           
         	 output_sol.close();
         	 output_trace.close();
