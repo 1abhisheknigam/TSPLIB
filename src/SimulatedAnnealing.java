@@ -75,6 +75,7 @@ public class SimulatedAnnealing {
 			for (int i = 0; i < solution.size() - 1; i++) {
 				newDistance += distance2[solution.get(i)][solution.get(i + 1)];
 			}
+			newDistance+=distance2[solution.get(solution.size()-1)][solution.get(0)];
 			double problem = problemlemCooling(newDistance, currentDistance, temp);
 			double r = rand.nextDouble();
 			temp = temp * (1.0 - coolingRate);
@@ -101,12 +102,14 @@ public class SimulatedAnnealing {
 		System.out.println(solution);
 		System.out.println("Total Iteations: " + iterations);
 		System.out.println("Total Dis: " + currentDistance);
-    	System.out.println("Total Run Time: " + totalTime/1000+"s");
+    		System.out.println("Total Run Time: " + totalTime/1000+"s");
 		output_sol.println((int)currentDistance);
 		for (int i = 0; i < solution.size() - 1; i = i + 2){
 			output_sol.print(solution.get(i) + " " + solution.get(i+1)+ " ");
 			output_sol.println(Math.round(distance2[solution.get(i)][solution.get(i+1)]*100)/100);
 		}
+		output_sol.print(solution.get(solution.size()-1) + " " + solution.get(0)+ " ");
+		output_sol.println(Math.round(distance2[solution.get(solution.size()-1)][solution.get(0)]*100)/100);
 		output_sol.close();
 		return solution;		
 	}
