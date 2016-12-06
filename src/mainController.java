@@ -54,8 +54,11 @@ public class mainController {
 				RunHeuristicFurthestInsertion.run(input_file, cutoff_in_seconds);
 				break;
 			case LS1_MODE:
-				int seed = Integer.valueOf(args[7]);
-				RunLS1.run(input_file, cutoff_in_seconds, seed);
+				int seed1 = Integer.valueOf(args[7]);
+				RunLS1.run(input_file, cutoff_in_seconds, seed1);
+			case LS2_MODE:
+				int seed2 = Integer.valueOf(args[7]);
+				RunLS2.run(input_file, cutoff_in_seconds, seed2);
 		}
 		
 		Toolkit.getDefaultToolkit().beep();    
