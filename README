@@ -1,0 +1,20 @@
+//////////////////////
+TSPLIB
+//////////////////////
+
+Running via Eclipse:
+
+
+Running via Command Line:
+>A jar of the program has been provided in the base directory of the project. This jar can be used to execute the program
+>To work on new files, again add them into the "src/data" folder
+>The output file will be generated even if it doesn't exist
+
+TO GENERATE A NEW JAR
+
+>Export the jar in the same level as the "src" file. This will allow the jar to access the files properly
+
+GENERAL NOTES:
+>The program will make a sound when it is completed
+>The original result files provided are in the "src/results/" folder
+

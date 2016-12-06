@@ -1,0 +1,2 @@
+java -jar TSPLIB.jar -inst Boston.tsp -alg MSTApprox -time 12
+java -jar TSPLIB.jar -inst Boston.tsp -alg Heur -time 12
