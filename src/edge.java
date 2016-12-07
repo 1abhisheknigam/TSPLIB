@@ -1,5 +1,18 @@
 import java.text.DecimalFormat;
 
+/** {@link edge}
+* 
+* A representation of an edge in a Graph
+* 
+* Used to create a MST, and a TSP Tour
+* 
+* int u 	   : the source "u" node of an edge (u,v)
+* int v 	   : the target "v" node of an edge (u,v)
+* double weight: the cost of the edge (u,v)
+* @author Abhishek Nigam
+* @since  Dec 6, 2016
+*/
+
 public class edge {
 	private int u;
 	private int v;
@@ -47,6 +60,10 @@ public class edge {
 		this.weight = weight;
 	}
 	
+	/*
+	 * Creates a deep flipped copy of this edge
+	 * If this edge is (a,b) this returns a new edge (b,a)
+	 */
 	public edge flip(){
 		return new edge(v, u, weight);
 	}

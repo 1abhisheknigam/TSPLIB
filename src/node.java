@@ -1,4 +1,17 @@
-
+/** node.java
+* 
+* A custom node class for representing a single location in a city.
+* 
+* This is primarily used internally for creating the MST. It is used for sorting purposes
+* to speed up the generation of the MST.
+* 
+* int index:       the location ID of this node
+* int from:		   the location ID of the other node
+* double distance: the distance to the node that has instance ID "from"
+*
+* @author Abhishek Nigam
+* @since  Dec 6, 2016
+*/
 public class node {
 	private int index;
 	private double distance;

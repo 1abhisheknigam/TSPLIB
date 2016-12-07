@@ -4,7 +4,22 @@ import java.text.DecimalFormat;
 import java.util.Iterator;
 import java.util.LinkedList;
 
+/** {@link RunHeuristicFurthestInsertion}
+* 
+* The exeuction file for the Heuristic Algorithm
+* 
+* Responsible for generating the tour using the Furthest Insertion algorithm
+* 
+* Called by mainController
+*
+* @author Abhishek Nigam
+* @since  Dec 6, 2016
+*/
+
 public class RunHeuristicFurthestInsertion {
+	/*
+	 * Static variables for output
+	 */
 	static private final String PATH_TO_TSP_DATA= "/src/data/";
 	static private final String PATH_TO_RESULTS_SOL= "/src/results/Heur/sol/";
 	static private final String PATH_TO_RESULTS_TRACE= "/src/results/Heur/trace/";
@@ -112,6 +127,10 @@ public class RunHeuristicFurthestInsertion {
 
 	}
 	
+	/*
+	 * Unused functions used for commented out debug lines
+	 */
+	
 	@SuppressWarnings("unused")
 	private static void printSeen(boolean[] seen){
 		String ret="";
@@ -137,6 +156,10 @@ public class RunHeuristicFurthestInsertion {
 		return "Seen[" + i + "] = " + seen[i];
 	}
 	
+	/*
+	 * Finds the  unseen node that is farthest away from the current tour and returns 
+	 * the closest edge to this unseen node
+	 */
 	private static edge getFarthestUnseen(graph init, boolean[] seen){
 		edge longest = new edge();
 		for(edge e : init){
@@ -159,24 +182,39 @@ public class RunHeuristicFurthestInsertion {
 		}
 	}
 	
+	/*
+	 * Completes the triangle tour
+	 */
 	private static edge getLastEdge(euc_2dnode[] nodes, LinkedList<edge> tour){
 		int root = tour.getFirst().getU();
 		int last = tour.getLast().getV();
 		return new edge(last, root, euc_2dnode.calcDistance(nodes[last], nodes[root]));
 	}
 	
+	/*
+	 * Initializes the seen array
+	 */
 	private static boolean[] initSeen(){
 		boolean seen[] = new boolean[init_nodes];
 		for(int i =0; i < seen.length;i++)seen[i] = false;
 		return seen;
 	}
 	
+	/*
+	 * Checks if all the locations have been seen
+	 * 
+	 * true  if yes
+	 * false if no
+	 */
 	private static boolean allSeen(boolean[] seen){
 		for(int i = 0; i < seen.length; i++)
 			if(!seen[i])return false;
 		return true;
 	}
 	
+	/*
+	 * Finds the closest edge in the current subtour to the specified new node
+	 */
 	private static edge getNearestEdge(LinkedList<edge> tour, euc_2dnode[] nodes, euc_2dnode newnode){
 		edge ret = new edge();
 		double closest=Double.MAX_VALUE;
@@ -191,6 +229,12 @@ public class RunHeuristicFurthestInsertion {
 		}
 		return ret;
 	}
+	
+	/*
+	 * For a given edge (a,c) and a given node b
+	 * Replaces (a,c) with (a,b) and (b,c)
+	 * Replaces this in the tour list so far by adding in the right place.
+	 */
 	private static void replaceEdge(LinkedList<edge> tour, edge toReplace, euc_2dnode[] nodes, int newnode){
 		int index = tour.indexOf(toReplace);//replacing at this position
 		tour.remove(toReplace);
@@ -204,6 +248,9 @@ public class RunHeuristicFurthestInsertion {
 		tour.add(index, edge1);
 	}
 	
+	/*
+	 * Finds the cost of the tour so far (used for improving the tour)
+	 */
 	private static double getCost(LinkedList<edge> tour){
 		double ret = 0;
 		for(edge e : tour)ret+=e.getWeight();

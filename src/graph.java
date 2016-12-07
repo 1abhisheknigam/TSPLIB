@@ -1,6 +1,19 @@
 import java.util.Comparator;
 import java.util.PriorityQueue;
 
+/** graph.java
+* 
+* Represents a Graph, or specifically the MST, as a collection of edges
+* 
+* By being a PriorityQueue, it automatically sorts the edges to easily show the entire MST in order
+* 
+* int num_nodes: the number of nodes in the Graph
+* double cost  : the cost of the edges in the Graph
+*
+* @author Abhishek Nigam
+* @since  Dec 6, 2016
+*/
+
 public class graph extends PriorityQueue<edge>{
 	private static final long serialVersionUID = 1L;
 	
@@ -56,6 +69,9 @@ public class graph extends PriorityQueue<edge>{
 		//return "{Graph n=" +  num_nodes + ",e=" + this.size() + "}:" + super.toString();
 	}
 	
+	/*
+	 * Creates a deep copy of this graph
+	 */
 	public graph copy(){
 		graph copy = new graph(size(), num_nodes);
 		for(edge e : this)
@@ -63,6 +79,10 @@ public class graph extends PriorityQueue<edge>{
 		return copy;
 	}
 	
+	/*
+	 * Checks the graph from specifed nodes by creating edges between any two nodes in the array
+	 * Creates duplicate edges i.e. for two nodes a, b, the Graph will contain both edges (a,b) and (b,a)
+	 */
 	public static graph createGraphFromEUCNodes(euc_2dnode[] nodes){
 		int num_nodes = nodes.length;
 		graph init = new graph(num_nodes * num_nodes, num_nodes);
@@ -82,6 +102,9 @@ public class graph extends PriorityQueue<edge>{
 		return init;
 	}
 
+	/*
+	 * Comparator for this PriorityQueue which sorts the edges in a readable manner
+	 */
 	private static class myComparator implements Comparator<edge>{//Used primarily for debug display
 		@Override
 		public int compare(edge arg0, edge arg1) {

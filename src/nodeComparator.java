@@ -1,5 +1,13 @@
 import java.util.Comparator;
 
+/** nodeComparator.java
+* 
+* A custom comparator to automatically sort a PriorityQueue of nodes
+*
+* @author Abhishek Nigam
+* @since  Dec 6, 2016
+*/
+
 public class nodeComparator implements Comparator<node>{
 
 	@Override

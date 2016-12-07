@@ -2,6 +2,20 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 
+/** {@link euc_2dnode}
+* 
+* A representation of a location in 2D space
+* 
+* Used to create a TSP tour
+* 
+* int index : the location ID of this node
+* double x  : the x-coordinate of this node
+* double y  : the y-coordinate of this node
+*
+* @author Abhishek Nigam
+* @since  Dec 6, 2016
+*/
+
 public class euc_2dnode {
 	int index;
 	double x;
@@ -40,6 +54,9 @@ public class euc_2dnode {
 		return "{" + index + ", " + x + "," + y + "}";
 	}
 	
+	/*
+	 * Calculates distance between two given nodes
+	 */
 	public static double calcDistance(euc_2dnode n1, euc_2dnode n2){
 		double dist = 0;
 		dist = Math.sqrt(Math.pow(n1.x - n2.x, 2) + Math.pow(n1.y - n2.y, 2));
@@ -47,7 +64,9 @@ public class euc_2dnode {
 		return dist;
 	}
 	
-	//Create Array of Euclidean 2D nodes from input file	
+	/*
+	 * Create Array of Euclidean 2D nodes from input file	
+	 */
 	public static euc_2dnode[] parse(String graph_file) throws IOException {
 		BufferedReader br = new BufferedReader(new FileReader(graph_file));
 		System.out.println(br.readLine());//"Name: Boston"

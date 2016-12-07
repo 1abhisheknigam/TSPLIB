@@ -1,6 +1,20 @@
 import java.awt.Toolkit;
 import java.io.IOException;
 
+
+/** mainController.java
+* 
+* The main file for TSPLIB
+* 
+* Checks all the arguments for commandline and then runs the proper algorithm that is desired.
+* 
+* Also checks if the arguments are valid. If not, sends a custom error message telling user 
+* exactly what the mistake was.
+*
+* @author Abhishek Nigam
+* @since  Dec 6, 2016
+*/
+
 public class mainController {
 	
 	private static final String MST_APPROX_MODE = "MSTApprox";
@@ -16,6 +30,9 @@ public class mainController {
 	
 	private static final String INPUT_FILE_TYPE = "tsp";
 
+	/*
+	 * main class of TSPLIB, responsible for sending arguments to the right place
+	 */
 	public static void main(String[] args) throws NumberFormatException, IOException {
 		/* ARGUMENTS INFORMATION
 		 * exec −inst < filename > −alg [BnB|MSTApprox|Heur|LS1|LS2] −time < cutoff in seconds > −seed < random seed >
@@ -64,6 +81,9 @@ public class mainController {
 		Toolkit.getDefaultToolkit().beep();    
 	}
 	
+	/*
+	 * Does the meat of the argument checking
+	 */
 	private static void checkArgs(String[] args) throws InvalidArgsException{
 		//not the final versions yet
 		if(args.length<6) throw new InvalidArgsException("Too few arguments");
@@ -84,12 +104,23 @@ public class mainController {
 		
 	}
 	
+	/*
+	 * Checks for random seeds if needed for specific algorithms.
+	 */
 	private static void checkargs(String[] args) throws InvalidArgsException{
 		if(args.length<7)throw new InvalidArgsException("No random seed provided for mode " + args[3]);
 		if(!args[6].equals(SEED_FLAG)) throw new InvalidArgsException("No -seed flag");
 		if(args.length<8)throw new InvalidArgsException("No random seed provided for mode " + args[3]);
 	}
 	
+	
+	/** InvalidArgsException.class
+	* 
+	* A custom exception built to tell what was wrong in the way the program was called.
+	*
+	* @author Abhishek Nigam
+	* @since  Dec 6, 2016
+	*/
 	private static class InvalidArgsException extends Exception{
 		private static final long serialVersionUID = -223663034384178530L;
 		public InvalidArgsException(String message) {

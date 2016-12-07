@@ -12,8 +12,24 @@ import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.PriorityQueue;
 
+/** {@link RunMSTApprox}
+* 
+* The execution code to create a TSP Tour using the MST Approximation Method
+* 
+* An MST is created using Prim's Algorithm
+* 
+* The TSP Tour is then created from this MST using a Depth First Search (DFS)
+* 
+* @author Abhishek Nigam
+* @since  Dec 6, 2016
+*/
+
 public class RunMSTApprox{
 
+
+/*
+ * static path variables to input and output
+ */
 	static private final String PATH_TO_TSP_DATA= "/src/data/";
 	static private final String PATH_TO_RESULTS_SOL= "/src/results/MSTApprox/sol/";
 	static private final String PATH_TO_RESULTS_TRACE= "/src/results/MSTApprox/trace/";
@@ -115,7 +131,13 @@ public class RunMSTApprox{
 		System.out.println("Done");
 
 	}
-		
+	
+
+/*
+ * Creates the MST from the given initial graph and returns it in a new Graph object which can be reused and viewed
+ * 
+ * The MST is created using Prim's Algorithm
+ */
 	private static graph GenerateMST(graph init){//without from
 		graph mst = new graph();
 		HashSet<Integer>            visited = new HashSet<Integer>();
@@ -166,6 +188,10 @@ public class RunMSTApprox{
 		return mst;
 	}
 		
+
+/*
+ * Unused code for commented blocks which can display the MST in an aesthetically pleasing format
+ */
 	@SuppressWarnings("unused")
 	private static void displayMST(graph mst, PrintWriter output, double MSTtotal){
 		output.println("{Graph n=" +  mst.getNum_nodes() + ",e=" + mst.size() + "}:");
@@ -183,6 +209,14 @@ public class RunMSTApprox{
 		output.println("--------------------");
 	}
 	
+
+/*
+ * Method to create TSP Tour from a given MST, and a given root.
+ * 
+ * Using the specified root, a DFS is performed and then a Euler Tour is created using shortcutting
+ * 
+ * This tour only consists of the indices
+ */
 	private static LinkedList<Integer> createIntegerTourFromMST(graph mst, int root) {
 		LinkedList<Integer> tour = new LinkedList<>();
 		LinkedList<Integer> seen = new LinkedList<>();
@@ -199,6 +233,12 @@ public class RunMSTApprox{
 		return tour;
 	}
 	
+
+	/*
+	 * Method to create TSP Tour from a given MST, and a given root.
+	 * 
+	 * Using the specified root, a DFS is performed and then a Euler Tour is created using shortcutting
+	 */
 	@SuppressWarnings("unused")
 	private static LinkedList<edge> createTourFromMST(graph mst, graph init, int root) {
 		LinkedList<edge> dfs_mst = new LinkedList<>();
@@ -223,6 +263,13 @@ public class RunMSTApprox{
 		return dfs_mst;
 	}
 	
+	/*
+	 * The actual method performing the DFS
+	 * 
+	 * This tour only consists of the indices
+	 * 
+	 * The DFS is performed recursively with the current edge, seen array, the original graph, and the subtour so far
+	 */
 	private static void DFS_MST_indices(edge current, LinkedList<Integer> seen, graph orig, LinkedList<Integer> tour ){
 		seen.add(current.getV());
 		tour.add(current.getV());
@@ -240,6 +287,11 @@ public class RunMSTApprox{
 		
 	}
 	
+	/*
+	 * The actual method performing the DFS
+	 * 
+	 * The DFS is performed recursively with the current edge, seen array, the original graph, and the subtour so far
+	 */
 	private static void DFS_MST(edge current, LinkedList<Integer> seen, graph orig, LinkedList<edge> dfs_mst ){
 		seen.add(current.getV());
 		dfs_mst.add(current);
@@ -256,12 +308,17 @@ public class RunMSTApprox{
 		}
 		
 	}
-	
+	/*
+	 * The function to print the tour to the solution file
+	 */
 	private static void displayTour(LinkedList<edge> TSPtour, PrintWriter output_sol) {
 		output_sol.println(/*"Cost: " +*/ (int)TSPcost);
 		for(edge e : TSPtour)output_sol.println(e.toIntString());
 	}
 	
+	/*
+	 * This method takes the MST Index tour and converts it into a TSP Tour with weights
+	 */
 	private static LinkedList<edge> convertIndexTourToEdgeTour(LinkedList<Integer> indexTour, graph init){
 		LinkedList<edge> tour = new LinkedList<>();
 		TSPcost = 0;
