@@ -14,7 +14,7 @@ public class TSPBNB{
 	public static double startTime;
 	public static double endTime;
 	public static double runTime;
-	public static double RUNTIMELIMIT;//3000 run time limit in milli seconds
+	public static double RUNTIMELIMIT;
 	public static boolean runTimeExceed = false;
 	public static ArrayList newEdge = new ArrayList();
 	private int newNodeCount = 0;
@@ -26,7 +26,7 @@ public class TSPBNB{
 		numRows = numCols = size;
 		c = new Cost(numRows, numCols);
 		this.output_trace = output_trace;
-		this.RUNTIMELIMIT = cutoff*1000;
+		this.RUNTIMELIMIT = cutoff*1000;//cut off is in seconds, Runtimelimit is in millseconds
 		for (int row = 1; row <= size; row++) {
 			for (int col = 1; col <= size; col++) {
 				c.matrix[row][col] =  costMatrix[row][col];
@@ -49,12 +49,10 @@ public class TSPBNB{
 		newNodeCount++;
 		root.computeLowerBound();
 	
-		System.out.println(
-			"Twice the lower bound for root node (no constraints): " +
-			root.lowerBound());
-			// Apply the branch and bound algorithm
-		    startTime = System.nanoTime();
-			branchAndBound(root, -1);
+		
+		// Apply the branch and bound algorithm
+		startTime = System.nanoTime();
+		branchAndBound(root, -1);
 	}
 	
 	private void branchAndBound (City node, int edgeIndex) {

@@ -4,6 +4,7 @@ import java.io.*;
 import java.util.*;
 
 public class RunLS1 {
+	//File path string
 	static private final String PATH_TO_TSP_DATA= "/src/data/";
 	static private final String PATH_TO_RESULTS_SOL= "/src/results/LS1/sol/";
 	static private final String PATH_TO_RESULTS_TRACE= "/src/results/LS1/trace/";
@@ -33,20 +34,19 @@ public class RunLS1 {
 		String output_file_trace = workingDir + PATH_TO_RESULTS_TRACE + output_base_trace;
 		PrintWriter output_trace = new PrintWriter(output_file_trace, "UTF-8");
 		
-	String fileName = workingDir + PATH_TO_TSP_DATA + input_file;
-    String line = null;
-    int dimension = 0;
-    double [][] input;
+		String fileName = workingDir + PATH_TO_TSP_DATA + input_file;
+  		String line = null;
+    		int dimension = 0;
+   		double [][] input;
     
 		
-        
+        //read the file 
         try {
             FileReader fileReader = new FileReader(fileName);
             BufferedReader bufferedReader = new BufferedReader(fileReader);
             int count = 0;
             while((line = bufferedReader.readLine()) != null) {
             	count++;
-                //System.out.println(line);
                 if(count == 3){
             		dimension = (int)Double.parseDouble(line.split(" ")[1]);
             		count = 0;
@@ -57,11 +57,10 @@ public class RunLS1 {
             
             for(int i = 0; i < 2; i++){
             	line = bufferedReader.readLine();
-            	//System.out.println(line);
+
             }
             
             while( !(line = bufferedReader.readLine()).equals("EOF") ) {
-                //System.out.println(line);
                 double id = Double.parseDouble(line.split(" ")[0]);
                 double x =  Double.parseDouble(line.split(" ")[1]);
                 double y =  Double.parseDouble(line.split(" ")[2]);
@@ -69,11 +68,10 @@ public class RunLS1 {
                 input[count][1] = x;
                 input[count][2] = y;
                 count++;
-              //System.out.println("id:" + input[count-1][0] + " x:" + input[count-1][1] + " y:"+input[count-1][2]);;
             }
              bufferedReader.close();
              
-             
+             //calculate the distance for every two point and store in the matrix
              double [][] distance = new double[dimension+1][dimension+1];
              for(int i = 1; i <= dimension; i++){
             	 for(int j = 1; j <= dimension; j++){
@@ -84,16 +82,13 @@ public class RunLS1 {
             		 
             	 }
              }
- 
+		
+ 	     //calculate the total time 
              double startTime = System.nanoTime();
              ls1 tsp = new ls1(distance, dimension,seed,cutoff, output_trace);	
              
-            
-             System.out.println("Best Tour cost Sofar:" + tsp.getBestCost());
-             System.out.println("Best Route:" + Arrays.toString(tsp.getRoute()));
              double endTime   = System.nanoTime();
              double totalTime = endTime - startTime;
-        	 System.out.println("System Run Time: " + totalTime/1000000+"ms");
         	 
         	 int bestcost=(int)tsp.getBestCost(); 
         	 int[] bestroute=tsp.getRoute();
@@ -102,12 +97,14 @@ public class RunLS1 {
             	 for(int i = 0; i < bestroute.length-1; i++){
             		 int startNode = bestroute[i]-1;
             		 int endNode = bestroute[i+1]-1;
+			 // print the solution file
             		 output_sol.print(startNode + " " + endNode + " "+ (int)distance[startNode+1][endNode+1]);
             		 output_sol.println();
             	 }
+		 //print the last point and the first point and the distance between them
             	 int n1 = bestroute[bestroute.length-1]-1;
             	 int n2 =bestroute[0]-1; 
-            	 output_sol.print(n1 + " " + n2 + " "+ (int)distance[bestroute.length-1][0]);
+            	 output_sol.print(n1 + " " + n2 + " "+ (int)distance[n1+1][n2+1]);
             		 output_sol.println();
           
         	 output_sol.close();

@@ -42,11 +42,14 @@ public class RunBnB {
 		PrintWriter output_trace = new PrintWriter(output_file_trace, "UTF-8");
 		
 	String fileName = workingDir + PATH_TO_TSP_DATA + input_file;
-    String line = null;
-    int dimension = 0;
-    double [][] input;
+    	String line = null;
+    	int dimension = 0;
+    	double [][] input;
     
     try {
+	/*
+	Read file and generate cost matrix, which is distance between two cities
+	*/
         FileReader fileReader = new FileReader(fileName);
         BufferedReader bufferedReader = new BufferedReader(fileReader);
         int count = 0;
@@ -90,28 +93,32 @@ public class RunBnB {
         		 
         	 }
          }
-         // pass solution file and trace file here into the tsp run file
+         // pass solution file and trace file here into the tsp run file, tun branch and bound algorithm
          TSPBNB tsp = new TSPBNB(distance, dimension, output_trace, cutoff);	
 			 tsp.calculate();
 
 			 if(TSPBNB.runTimeExceed){
-        	 System.out.println("Exceed Time Limit: " + TSPBNB.RUNTIMELIMIT);
-         }
-         else{
-        	 output_sol.println(tsp.bestNode.tourCost);
-        	 String Best_Tour_cost = tsp.bestNode.tour();
-        	 String[] routeNode = Best_Tour_cost.split(" ");
-        	 for(int i = 0; i < routeNode.length-1; i++){
-        		 int startNode = Integer.parseInt(routeNode[i])-1;
-        		 int endNode = Integer.parseInt(routeNode[i+1])-1;
-        		 output_sol.println(startNode + " " + endNode + " "+ (int)distance[startNode+1][endNode+1]);
-        	 }
-        	 //output_sol.println(Best_Tour_cost);
-        	 
-        	 
-        	 
-        	 
-         }
+        	 		System.out.println("Exceed Time Limit: " + TSPBNB.RUNTIMELIMIT);
+				 output_sol.println(tsp.bestNode.tourCost);
+        	 		String Best_Tour_cost = tsp.bestNode.tour();
+        	 		String[] routeNode = Best_Tour_cost.split(" ");
+        	 		for(int i = 0; i < routeNode.length-1; i++){
+					 int startNode = Integer.parseInt(routeNode[i])-1;
+					 int endNode = Integer.parseInt(routeNode[i+1])-1;
+        		 	output_sol.println(startNode + " " + endNode + " "+ (int)distance[startNode+1][endNode+1]);
+        	 		}
+         		 }
+			 else{
+				 output_sol.println(tsp.bestNode.tourCost);
+				 String Best_Tour_cost = tsp.bestNode.tour();
+				 String[] routeNode = Best_Tour_cost.split(" ");
+				 for(int i = 0; i < routeNode.length-1; i++){
+					 int startNode = Integer.parseInt(routeNode[i])-1;
+					 int endNode = Integer.parseInt(routeNode[i+1])-1;
+					 output_sol.println(startNode + " " + endNode + " "+ (int)distance[startNode+1][endNode+1]);
+				 }
+				 //output_sol.println(Best_Tour_cost);
+			   }
          /* close the solution file and trace file */
 	 		output_sol.close();
 	 		output_trace.close();
@@ -122,12 +129,12 @@ public class RunBnB {
         System.out.println(
             "Unable to open file '" +
             fileName + "'");
-    }
-    catch(IOException ex) {
-        System.out.println(
-            "Error reading file '"
-            + fileName + "'");
-    }
+    	}
+	    catch(IOException ex) {
+		System.out.println(
+		    "Error reading file '"
+		    + fileName + "'");
+	    }
     
 	}   
 	

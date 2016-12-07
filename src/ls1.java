@@ -34,7 +34,7 @@ public class ls1 {
 	public double getBestCost(){
 	int fir=0;
 	int sec=0;
-//	int maxinteration=1000;
+	//get the initial solution by random
 	ArrayList<Integer> citynumr=new ArrayList<Integer>(dimension);
     for(int i = 1; i <= dimension; i++) citynumr.add(i);
 
@@ -47,7 +47,6 @@ public class ls1 {
 	Random randforpos = new Random(seed);	
 	double startTime = System.nanoTime();
     while(totaltime<cutoff_time){
-
     fir = 1 + (int)(randforpos.nextInt(dimension));
     sec = 1 + (int)(randforpos.nextInt(dimension));
     while (Math.abs(fir-sec)<2)      sec = 1 + (int)(randforpos.nextInt(dimension));
@@ -63,6 +62,7 @@ public class ls1 {
     int[] citynum3 =new int [dimension];
     int[] citynum4 =new int [dimension];
     int[] citynum5 =new int [dimension];
+    //swap the point
     for(int i=0;i<fir;i++){
     	citynum1[i]=citynum[i];
     	citynum2[i+sec-fir]=citynum[i];
@@ -84,7 +84,7 @@ public class ls1 {
     	citynum4[i-sec]=citynum[i];
     	citynum5[i-sec]=citynum[i];
     }
-    
+    //compare different distance
     double [] totaldistance ={0.00,0.00,0.00,0.00,0.00,0.00};
     for (int i=0;i<citynum.length-1;i++){
     	totaldistance[0]+= distance[citynum[i]][citynum[i+1]];
@@ -129,8 +129,8 @@ public class ls1 {
 		        }
 		   
 		    double endTime = System.nanoTime();
-		    totaltime= (endTime-startTime)/1000000;
-
+		    totaltime= (endTime-startTime)/1000000000;
+	//output the best one
 			    double betterRouteFoundTime = (System.nanoTime() - startTime)/(double)1000000;
 				output_trace.println(twos_precision.format(betterRouteFoundTime/1000) + ", " + (int)best);
 				tmpBest = best;

@@ -3,9 +3,10 @@
 /RunBnB.class
 /RunHeuristicFurthestInsertion.class
 /RunLS1.class
+/RunLS2.class
 /RunMSTApprox.class
+/SimulatedAnnealing.class
 /TSPBNB.class
-/data/
 /edge.class
 /euc_2dnode.class
 /graph$myComparator.class
@@ -15,10 +16,4 @@
 /mainController.class
 /node.class
 /nodeComparator.class
-/olddata/
-/optimal/
 /results/
-/RunSA.class
-/SimulatedAnnealing.class
-/LS2.class
-/RunLS2.class

@@ -11,8 +11,8 @@ public class City {
 	byte [] trip;
 	String nodeAsString;
 	boolean isLoop = false;
-	static BitSet b; 
 	byte [][] constraint;
+	static BitSet b; 
 	public City (int numRows, int numCols) {
 		this.numRows = numRows;
 		this.numCols = numCols;
@@ -46,7 +46,6 @@ public class City {
 		public void setConstraint (byte [][] constraint) {
 			this.constraint = constraint;
 		}
-		
 		public void addDisallowedEdges () {
 			for (int row = 1; row <= numRows; row++) {
 			
@@ -78,6 +77,7 @@ public class City {
 					}
 			}
 		
+		
 				public void addRequiredEdges () {
 					for (int row = 1; row <= numRows; row++) {
 						int count = 0;
@@ -96,7 +96,6 @@ public class City {
 						}
 					}
 				}
-					
 					
 			public void computeLowerBound () {
 					int lowB = 0;
@@ -143,22 +142,9 @@ public class City {
 					
 						lowerBound = lowB; // This is twice the actual lower bound
 					}
-					// Queries
 					
-					public byte [] trip () {
-						return trip;
-					}
-					public byte constraint (int row, int col) {
-						return constraint[row][col];
-					}
-					public byte [][] constraint () {
-						return constraint;
-					}
-					public int lowerBound () {
-						return lowerBound;
-					}
+					
 					public boolean isTour () {
-						// Determine path from 1
 						int path = 0;
 						for (int col = 2; col <= numCols; col++) {
 							if (constraint[1][col] == 1) {
@@ -219,7 +205,6 @@ public class City {
 									return returnString;
 								}
 								
-								// Internal methods
 								private int smallest () {
 										int s = nodeCosts[1];
 										int index = 1;
@@ -288,4 +273,16 @@ public class City {
 										}
 									}
 								}
+					public byte [] trip () {
+						return trip;
+					}
+					public byte constraint (int row, int col) {
+						return constraint[row][col];
+					}
+					public byte [][] constraint () {
+						return constraint;
+					}
+					public int lowerBound(){
+						return lowerBound;
+					}
 }

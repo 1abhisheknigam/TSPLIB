@@ -88,6 +88,7 @@ public class SimulatedAnnealing {
 				continue;
 			}
 			//
+			int old = (int)currentDistance;
 			currentDistance = newDistance;
 			cur_error = (newDistance - optimal) / optimal;
 			endTime   = System.currentTimeMillis();;
@@ -95,8 +96,9 @@ public class SimulatedAnnealing {
 	        // use the next command to generate data for QRTD 
 	        //double Psolve = (currentDistance/655454-1)*100.0;
 	        // if (iterations % 10 == 0 && Psolve <= 30){
+		if (currentDistance != old && currentDistance < old){
 		    output_trace.println(twos_precision.format(totalTime / 1000) + ", " + (int)currentDistance);	        	
-	        //}
+	        }
 		}
 		output_trace.close();
 		System.out.println(solution);
