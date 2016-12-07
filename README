@@ -2,13 +2,22 @@
 TSPLIB
 //////////////////////
 
-Running via Eclipse:
+Welcome to TSPLIB a library for solving the Travelling Salesman Problem! To run the program make use of the jar in the same directory as this file and use the following command:
 
+exec −inst < filename > −alg [BnB|MSTApprox|Heur|LS1|LS2] −time < cutoff in seconds > −seed < random seed >
+
+This library supports solving the TSP by using
+- Branch and Bound
+- Minimum Spanning Tree Approximation
+- Heuristic: Farthest Insertion Approximation
+- Local Search 1 - Iterative
+- Local Search 2 - Simulated Annealing
 
 Running via Command Line:
 >A jar of the program has been provided in the base directory of the project. This jar can be used to execute the program
 >To work on new files, again add them into the "src/data" folder
 >The output file will be generated even if it doesn't exist
+>An example of how to run the jar is provided in the "runncommands.txt" in the same directoy as this file
 
 TO GENERATE A NEW JAR
 
@@ -17,4 +26,5 @@ TO GENERATE A NEW JAR
 GENERAL NOTES:
 >The program will make a sound when it is completed
 >The original result files provided are in the "src/results/" folder
+>These are further subdivided based on algorithm type, and sol or trace files respectively
 
