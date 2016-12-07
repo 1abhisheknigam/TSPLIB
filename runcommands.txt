@@ -1,2 +1,5 @@
-java -jar TSPLIB.jar -inst Boston.tsp -alg MSTApprox -time 12
-java -jar TSPLIB.jar -inst Boston.tsp -alg Heur -time 12
+java -jar TSPLIB.jar -inst Cincinnati.tsp -alg BnB -time 10
+java -jar TSPLIB.jar -inst Cincinnati.tsp -alg MSTApprox -time 10
+java -jar TSPLIB.jar -inst Cincinnati.tsp -alg Heur -time 10
+java -jar TSPLIB.jar -inst Cincinnati.tsp -alg LS1 -time 10 -seed 5
+java -jar TSPLIB.jar -inst Cincinnati.tsp -alg LS2 -time 10 -seed 5
